@@ -9,10 +9,12 @@ package model;
  * @author user
  */
 public enum Zanr {
-    ROMAN,
-    POEZIJA,
-    ISTORIJSKI,
-    NAUCNA_FANTASTIKA,
-    DETEKTIVSKI;
-    
+//    ROMAN,
+//    POEZIJA,
+//    ISTORIJSKI,
+//    NAUCNA_FANTASTIKA,
+//    DETEKTIVSKI;
+      Roman,
+      Poezija,
+      Strip
 }

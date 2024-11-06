@@ -25,7 +25,8 @@ public class GlavnaForma extends javax.swing.JFrame {
         initComponents();
         controller = Controller.getInstance();
         
-        ModelTabeleKnjige modelTabele = new ModelTabeleKnjige(controller.getListaKnjiga());
+//        ModelTabeleKnjige modelTabele = new ModelTabeleKnjige(controller.getListaKnjiga());
+        ModelTabeleKnjige modelTabele = new ModelTabeleKnjige(controller.ucitajKnjigeIzBaze ());
         
         jTableKnjige.setModel(modelTabele);
              
@@ -193,8 +194,12 @@ public class GlavnaForma extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Morate selektovati knjigu", "Upozorenje", JOptionPane.WARNING_MESSAGE);
             
         } else{
+            
+            ModelTabeleKnjige mtb = (ModelTabeleKnjige) jTableKnjige.getModel();
+            int idKnjige = mtb.getListaKnjiga().get(selektovaniRed).getId();
             Controller controller = Controller.getInstance();
-            controller.obrisiKnjigu(selektovaniRed);
+            
+            controller.obrisiKnjigu(idKnjige);
             
             osveziTabelu();
             
@@ -218,7 +223,7 @@ public class GlavnaForma extends javax.swing.JFrame {
             return;
         }else{
             Controller controller = Controller.getInstance();
-            Knjiga selektovanaKnjiga =  controller.getListaKnjiga().get(selektovaniRed);
+            Knjiga selektovanaKnjiga =  controller.ucitajKnjigeIzBaze().get(selektovaniRed);
             
             FormaKnjiga formaKnjiga = new FormaKnjiga(this, true, selektovanaKnjiga);
             formaKnjiga.setVisible(true);
@@ -280,9 +285,16 @@ public class GlavnaForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     void osveziTabelu() {
+            
+        controller = Controller.getInstance();
         
-        ModelTabeleKnjige modelTabele = (ModelTabeleKnjige) jTableKnjige.getModel();
-        modelTabele. osveziPodatke();
+//        ModelTabeleKnjige modelTabele = new ModelTabeleKnjige(controller.getListaKnjiga());
+        ModelTabeleKnjige modelTabele = new ModelTabeleKnjige(controller.ucitajKnjigeIzBaze ());
+        
+        jTableKnjige.setModel(modelTabele);
+        
+//        ModelTabeleKnjige modelTabele = (ModelTabeleKnjige) jTableKnjige.getModel();
+//        modelTabele.osveziPodatke();
     }
     
 }

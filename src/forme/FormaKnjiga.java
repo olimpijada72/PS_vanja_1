@@ -231,7 +231,7 @@ public class FormaKnjiga extends javax.swing.JDialog {
     private void jButtonIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIzmeniActionPerformed
         int godinaIzdanja;
         String naziv = jTextFieldNaziv.getText();
-        String isbn = jTextFieldNaziv.getText();
+
         try {
 
             godinaIzdanja = Integer.parseInt(jTextFieldGodinaIzdanja.getText());
@@ -244,15 +244,14 @@ public class FormaKnjiga extends javax.swing.JDialog {
         Zanr zanr = (Zanr) jComboBoxZanr.getSelectedItem();
         Autor autor = (Autor) jComboBoxAutori.getSelectedItem();
 
-        Knjiga novaKnjiga = new Knjiga(naziv, autor, isbn, godinaIzdanja, zanr);
-
-        knjigaZaIzmenu.setAutor(autor);
-        knjigaZaIzmenu.setNaslov(naziv);
-        knjigaZaIzmenu.setGodinaIzdanja(godinaIzdanja);
-        knjigaZaIzmenu.setZanr(zanr);
+        controller.azurirajKnjigu(knjigaZaIzmenu);
+//        knjigaZaIzmenu.setAutor(autor);
+//        knjigaZaIzmenu.setNaslov(naziv);
+//        knjigaZaIzmenu.setGodinaIzdanja(godinaIzdanja);
+//        knjigaZaIzmenu.setZanr(zanr);
         glavnaForma.osveziTabelu();
         JOptionPane.showMessageDialog(this, "Knjiga uspesno izmenjena", "Usepsno", JOptionPane.INFORMATION_MESSAGE);
-        
+
         this.dispose();
     }//GEN-LAST:event_jButtonIzmeniActionPerformed
 
@@ -316,7 +315,7 @@ public class FormaKnjiga extends javax.swing.JDialog {
 
     private void popuniComboBoxAutorima() {
         jComboBoxAutori.removeAllItems();
-        List<Autor> autori = Controller.getInstance().getListaAutora();
+        List<Autor> autori = Controller.getInstance().ucitajAutoreIzBaze();
         for (Autor autor : autori) {
             jComboBoxAutori.addItem(autor);
         }
